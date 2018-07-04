@@ -8,7 +8,13 @@ AMOGCard::AMOGCard()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	CardComponent = CreateDefaultSubobject<UMOGCardComponent>(TEXT("Card Component"));
+	AddOwnedComponent(CardComponent);
+}
 
+void AMOGCard::InitCard(FCardInfo Info)
+{
+	CardComponent->SetCardInfo(Info);
 }
 
 // Called when the game starts or when spawned
