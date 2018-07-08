@@ -4,4 +4,14 @@
 
 
 
+bool AMOGPlayerController::Server_MoveCard_Validate(AMOGCard* Card)
+{
+    AMOGGameModeBase* GameMode = GetWorld()->GetAuthGameMode<AMOGGameModeBase>();
 
+    return GameMode->GetCurrentTurnController() == this;
+}
+
+void AMOGPlayerController::Server_MoveCard_Implementation(AMOGCard* Card)
+{
+
+}

@@ -1,32 +1,29 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "MOGCard.h"
+#include "MOGTable.h"
+#include "MOGGameModeBase.h"
 
 
 // Sets default values
-AMOGCard::AMOGCard()
+AMOGTable::AMOGTable()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	CardComponent = CreateDefaultSubobject<UMOGCardComponent>(TEXT("Card Component"));
-	AddOwnedComponent(CardComponent);
-}
 
-void AMOGCard::InitCard(FCardInfo Info)
-{
-	CardComponent->SetCardInfo(Info);
-    OnCardInitiated();
 }
 
 // Called when the game starts or when spawned
-void AMOGCard::BeginPlay()
+void AMOGTable::BeginPlay()
 {
 	Super::BeginPlay();
-	
+    if (AMOGGameModeBase* GameMode = GetWorld()->GetAuthGameMode<AMOGGameModeBase>())
+    {
+        GameMode->SetTable(this);
+    }
 }
 
 // Called every frame
-void AMOGCard::Tick(float DeltaTime)
+void AMOGTable::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 

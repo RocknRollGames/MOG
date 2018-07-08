@@ -8,7 +8,21 @@
 void AMOGGameModeBase::BeginPlay()
 {
 	Super::BeginPlay();
-	CreateCards();
+    CreateCards();
+    ShuffleCards();
+    if (Table)
+    {
+        MoveCardsToTheStock();
+    }
+}
+
+void AMOGGameModeBase::SetTable(AMOGTable* InTable)
+{
+    Table = InTable;
+    if (HasActorBegunPlay())
+    {
+        MoveCardsToTheStock();
+    }
 }
 
 void AMOGGameModeBase::CreateCards()
@@ -26,7 +40,7 @@ void AMOGGameModeBase::CreateCards()
 
             NewCard->InitCard(CardInfo);
 
-			CardsOnATable.Push(NewCard);
+			AllCards.Push(NewCard);
 		}
 	}
 }
@@ -34,4 +48,62 @@ void AMOGGameModeBase::CreateCards()
 void AMOGGameModeBase::ShuffleCards()
 {
 
+}
+
+uint8 AMOGGameModeBase::GetNumberOfStockCards()
+{
+    return StockCards.Num();
+}
+
+uint8 AMOGGameModeBase::GetNumberOfPlayerCardsOnTable(uint8 PlayerNum, ECardSuit Suit)
+{
+    TArray<AMOGCard*> PlayerCardsOnTable = PlayerNum == 1 ? Player1Cards : Player2Cards;
+
+    uint8 Counter = 0;
+    for (AMOGCard* Card : PlayerCardsOnTable)
+    {
+        if (Card->GetCardInfo().CardSuit == Suit)
+        {
+            Counter++;
+        }
+    }
+    return Counter;
+}
+
+uint8 AMOGGameModeBase::GetNumberOfNeutralCardsOnTable(ECardSuit Suit)
+{
+    uint8 Counter = 0;
+    for (AMOGCard* Card : NeutralCards)
+    {
+        if (Card->GetCardInfo().CardSuit == Suit)
+        {
+            Counter++;
+        }
+    }
+    return Counter;
+}
+
+void AMOGGameModeBase::MoveCardsToTheStock()
+{
+    for (AMOGCard* Card : AllCards)
+    {
+        FTransform NewTransform = Table->GetStockPlace();
+        Card->SetActorTransform(NewTransform);
+        StockCards.Add(Card);
+    }
+}
+
+void AMOGGameModeBase::MoveCardToTheTable(AMOGCard* Card)
+{
+
+}
+
+AMOGPlayerController* AMOGGameModeBase::GetCurrentTurnController()
+{
+    return Turn == 1 ? FirstPlayerController : SecondPlayerController;
+}
+
+void AMOGGameModeBase::EndTurn()
+{
+    Turn = Turn == 1 ? 2 : 1;
 }

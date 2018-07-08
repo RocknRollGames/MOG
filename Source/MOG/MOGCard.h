@@ -5,8 +5,9 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "CardComponents/MOGCardComponent.h"
-#include "MOGPlayerController.h"
 #include "MOGCard.generated.h"
+
+class AMOGPlayerController;
 
 UCLASS()
 class MOG_API AMOGCard : public AActor
@@ -21,6 +22,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Data)
 	UMOGCardComponent* CardComponent;
+
+    UFUNCTION(BlueprintImplementableEvent, Category = Card)
+    void OnCardInitiated();
 
 	UFUNCTION(BlueprintCallable)
 	FCardInfo GetCardInfo() { return CardComponent->GetCardInfo(); }

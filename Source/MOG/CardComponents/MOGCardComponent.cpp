@@ -33,9 +33,8 @@ void UMOGCardComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 }
 
 FCardInfo::FCardInfo(ECardSuit InCardSuit, uint8 InCardValue)
+    : CardSuit(InCardSuit), CardValue(InCardValue)
 {
-    CardSuit = InCardSuit;
-    CardValue = InCardValue;
 }
 
 FCardInfo::FCardInfo()

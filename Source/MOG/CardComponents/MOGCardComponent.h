@@ -29,12 +29,10 @@ public:
 
     FCardInfo(ECardSuit InCardSuit, uint8 InCardValue);
 
-private:
-
-	UPROPERTY(EditAnywhere, Category = "Card Info")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Card Info")
 	ECardSuit CardSuit;
 	
-	UPROPERTY(EditAnywhere, Category = "Card Info")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Card Info")
 	uint8 CardValue;
 };
 
