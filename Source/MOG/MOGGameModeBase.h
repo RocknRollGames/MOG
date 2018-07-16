@@ -8,6 +8,8 @@
 #include "MOGTable.h"
 #include "MOGGameModeBase.generated.h"
 
+DECLARE_LOG_CATEGORY_EXTERN(LogMOGGameMode, Log, All)
+
 UCLASS()
 class MOG_API AMOGGameModeBase : public AGameModeBase
 {
@@ -16,6 +18,9 @@ class MOG_API AMOGGameModeBase : public AGameModeBase
 	virtual void BeginPlay() override;
     
 public:
+
+    virtual void PostLogin(APlayerController* NewPlayer) override;
+
 
     void SetTable(AMOGTable* InTable);
 

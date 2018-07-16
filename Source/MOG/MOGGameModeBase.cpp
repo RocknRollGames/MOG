@@ -4,6 +4,9 @@
 #include "CardComponents/MOGCardComponent.h"
 #include "GameFramework/Actor.h"
 #include <Engine/World.h>
+#include "MOGPlayerController.h"
+
+DEFINE_LOG_CATEGORY(LogMOGGameMode);
 
 void AMOGGameModeBase::BeginPlay()
 {
@@ -14,6 +17,22 @@ void AMOGGameModeBase::BeginPlay()
     {
         MoveCardsToTheStock();
     }
+}
+
+void AMOGGameModeBase::PostLogin(APlayerController* NewPlayer)
+{
+    Super::PostLogin(NewPlayer);
+    if (!FirstPlayerController)
+    {
+        FirstPlayerController = CastChecked<AMOGPlayerController>(NewPlayer);
+        return;
+    }
+    if (!SecondPlayerController)
+    {
+        SecondPlayerController = CastChecked<AMOGPlayerController>(NewPlayer);
+        return;
+    }
+    UE_LOG(LogMOGGameMode, Fatal, TEXT("Cant register %s, both places are occupied!"), *NewPlayer->GetName());
 }
 
 void AMOGGameModeBase::SetTable(AMOGTable* InTable)

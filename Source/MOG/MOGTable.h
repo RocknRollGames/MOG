@@ -24,6 +24,11 @@ public:
     UFUNCTION(BlueprintImplementableEvent, Category = Placing)
     FTransform GetNeutralCardPlace( ECardSuit CardSuit);
 
+    UFUNCTION(BlueprintCallable, Category = Placing)
+    void OnStockClicked();
+
+    UFUNCTION(BlueprintCallable, Category = Placing)
+    void OnCardFieldClicked(AMOGPlayerController* PlayerController, bool bIsNeutral, ECardSuit Suit);
 
 protected:
 	// Called when the game starts or when spawned

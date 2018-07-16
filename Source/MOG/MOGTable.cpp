@@ -2,6 +2,7 @@
 
 #include "MOGTable.h"
 #include "MOGGameModeBase.h"
+#include "MOGPlayerController.h"
 
 
 // Sets default values
@@ -9,6 +10,19 @@ AMOGTable::AMOGTable()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
+}
+
+void AMOGTable::OnStockClicked()
+{
+    if (AMOGPlayerController* PC = CastChecked<AMOGPlayerController>(GetWorld()->GetFirstPlayerController()))
+    {
+        PC->Server_StockTouched();
+    }
+}
+
+void AMOGTable::OnCardFieldClicked(AMOGPlayerController* PlayerController, bool bIsNeutral, ECardSuit Suit)
+{
 
 }
 
