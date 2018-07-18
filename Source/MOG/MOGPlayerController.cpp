@@ -15,6 +15,12 @@ bool AMOGPlayerController::Server_MoveCard_Validate(AMOGCard* Card)
     return true;
 }
 
+AMOGPlayerController::AMOGPlayerController(const FObjectInitializer& ObjectInitializer)
+    : Super(ObjectInitializer)
+{
+
+}
+
 void AMOGPlayerController::Server_MoveCard_Implementation(AMOGCard* Card)
 {
 

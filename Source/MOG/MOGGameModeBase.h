@@ -37,6 +37,9 @@ public:
 
     AMOGPlayerController* GetCurrentTurnController();
 
+    //virtual AActor* FindPlayerStart_Implementation(AController* Player, const FString& IncomingName) override;
+
+
     void EndTurn();
 
 private:

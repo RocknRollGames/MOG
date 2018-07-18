@@ -122,6 +122,11 @@ AMOGPlayerController* AMOGGameModeBase::GetCurrentTurnController()
     return Turn == 1 ? FirstPlayerController : SecondPlayerController;
 }
 
+// AActor* AMOGGameModeBase::FindPlayerStart_Implementation(AController* Player, const FString& IncomingName)
+// {
+//     return Super::FindPlayerStart_Implementation(Player, IncomingName);
+// }
+
 void AMOGGameModeBase::EndTurn()
 {
     Turn = Turn == 1 ? 2 : 1;

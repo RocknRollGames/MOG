@@ -17,6 +17,8 @@ class MOG_API AMOGPlayerController : public APlayerController
 	
 public:
 
+    AMOGPlayerController(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(Server, Reliable, WithValidation)
     void Server_MoveCard(AMOGCard* Card);
     void Server_MoveCard_Implementation(AMOGCard* Card);
