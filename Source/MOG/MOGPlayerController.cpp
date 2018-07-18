@@ -10,25 +10,14 @@ bool AMOGPlayerController::IsValidTurn()
     return GameMode->GetCurrentTurnController() == this;
 }
 
-bool AMOGPlayerController::Server_MoveCard_Validate(AMOGCard* Card)
-{
-    return true;
-}
-
-AMOGPlayerController::AMOGPlayerController(const FObjectInitializer& ObjectInitializer)
-    : Super(ObjectInitializer)
-{
-
-}
-
 void AMOGPlayerController::Server_MoveCard_Implementation(AMOGCard* Card)
 {
 
 }
 
-bool AMOGPlayerController::Server_StockTouched_Validate()
+void AMOGPlayerController::Server_CardTouched_Implementation()
 {
-    return true;
+
 }
 
 void AMOGPlayerController::Server_StockTouched_Implementation()
@@ -37,4 +26,19 @@ void AMOGPlayerController::Server_StockTouched_Implementation()
     {
         UE_LOG(LogMogPlayerController, Display, TEXT("%s touched stock"), *this->GetName());
     }
+}
+
+bool AMOGPlayerController::Server_MoveCard_Validate(AMOGCard* Card)
+{
+    return true;
+}
+
+bool AMOGPlayerController::Server_StockTouched_Validate()
+{
+    return true;
+}
+
+bool AMOGPlayerController::Server_CardTouched_Validate()
+{
+    return true;
 }

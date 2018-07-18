@@ -28,7 +28,7 @@ public:
     void OnStockClicked();
 
     UFUNCTION(BlueprintCallable, Category = Placing)
-    void OnCardFieldClicked(AMOGPlayerController* PlayerController, bool bIsNeutral, ECardSuit Suit);
+    void OnCardFieldClicked(bool bIsNeutral, ECardSuit Suit, uint8 PlayerNum);
 
 protected:
 	// Called when the game starts or when spawned

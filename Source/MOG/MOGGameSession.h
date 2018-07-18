@@ -14,7 +14,9 @@ class MOG_API AMOGGameSession : public AGameSession
 {
 	GENERATED_BODY()
 	
-	
-	
+public:
+
+    virtual void RegisterPlayer(APlayerController* NewPlayer, const TSharedPtr<const FUniqueNetId>& UniqueId, bool bWasFromInvite) override;
+
 	
 };

@@ -21,7 +21,7 @@ void AMOGTable::OnStockClicked()
     }
 }
 
-void AMOGTable::OnCardFieldClicked(AMOGPlayerController* PlayerController, bool bIsNeutral, ECardSuit Suit)
+void AMOGTable::OnCardFieldClicked( bool bIsNeutral, ECardSuit Suit, uint8 PlayerNum)
 {
 
 }

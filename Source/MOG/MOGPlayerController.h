@@ -16,9 +16,7 @@ class MOG_API AMOGPlayerController : public APlayerController
 	GENERATED_BODY()
 	
 public:
-
-    AMOGPlayerController(const FObjectInitializer& ObjectInitializer);
-
+    
     UFUNCTION(Server, Reliable, WithValidation)
     void Server_MoveCard(AMOGCard* Card);
     void Server_MoveCard_Implementation(AMOGCard* Card);
@@ -32,4 +30,8 @@ public:
     void Server_StockTouched_Implementation();
     bool Server_StockTouched_Validate();
 
+    UFUNCTION(Server, Reliable, WithValidation)
+    void Server_CardTouched();
+    void Server_CardTouched_Implementation();
+    bool Server_CardTouched_Validate();
 };

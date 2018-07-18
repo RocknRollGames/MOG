@@ -5,6 +5,7 @@
 #include "GameFramework/Actor.h"
 #include <Engine/World.h>
 #include "MOGPlayerController.h"
+#include "MOGWorldSettings.h"
 
 DEFINE_LOG_CATEGORY(LogMOGGameMode);
 
@@ -19,20 +20,21 @@ void AMOGGameModeBase::BeginPlay()
     }
 }
 
-void AMOGGameModeBase::PostLogin(APlayerController* NewPlayer)
+APlayerController* AMOGGameModeBase::Login(UPlayer* NewPlayer, ENetRole InRemoteRole, const FString& Portal, const FString& Options, const FUniqueNetIdRepl& UniqueId, FString& ErrorMessage)
 {
-    Super::PostLogin(NewPlayer);
+    APlayerController* PC = Super::Login(NewPlayer, InRemoteRole, Portal, Options, UniqueId, ErrorMessage);
     if (!FirstPlayerController)
     {
-        FirstPlayerController = CastChecked<AMOGPlayerController>(NewPlayer);
-        return;
+        FirstPlayerController = CastChecked<AMOGPlayerController>(PC);
+        return PC;
     }
     if (!SecondPlayerController)
     {
-        SecondPlayerController = CastChecked<AMOGPlayerController>(NewPlayer);
-        return;
+        SecondPlayerController = CastChecked<AMOGPlayerController>(PC);
+        return PC;
     }
-    UE_LOG(LogMOGGameMode, Fatal, TEXT("Cant register %s, both places are occupied!"), *NewPlayer->GetName());
+    UE_LOG(LogMOGGameMode, Error, TEXT("Cant register %s, both places are occupied!"), *UniqueId->ToString());
+    return nullptr;
 }
 
 void AMOGGameModeBase::SetTable(AMOGTable* InTable)
@@ -122,10 +124,19 @@ AMOGPlayerController* AMOGGameModeBase::GetCurrentTurnController()
     return Turn == 1 ? FirstPlayerController : SecondPlayerController;
 }
 
-// AActor* AMOGGameModeBase::FindPlayerStart_Implementation(AController* Player, const FString& IncomingName)
-// {
-//     return Super::FindPlayerStart_Implementation(Player, IncomingName);
-// }
+AActor* AMOGGameModeBase::FindPlayerStart_Implementation(AController* Player, const FString& IncomingName)
+{
+    AMOGWorldSettings* WorldSettings = CastChecked<AMOGWorldSettings>(GetWorld()->GetWorldSettings());
+    if (FirstPlayerController != nullptr && !FirstPlayerController->GetPawn())
+    {
+        return WorldSettings->FirstPlayerSpawn;
+    }
+    else
+    {
+        return WorldSettings->SecondPlayerSpawn;
+    }
+    //return Super::FindPlayerStart_Implementation(Player, IncomingName);
+}
 
 void AMOGGameModeBase::EndTurn()
 {
