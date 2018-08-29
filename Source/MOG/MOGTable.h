@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "MOGGameModeBase.h"
+#include "MOGGameStructs.h"
 #include "MOGTable.generated.h"
 
 UCLASS()
@@ -22,13 +24,19 @@ public:
     FTransform GetPlayerCardPlace(uint8 PlayerNum, ECardSuit CardSuit);
 
     UFUNCTION(BlueprintImplementableEvent, Category = Placing)
-    FTransform GetNeutralCardPlace( ECardSuit CardSuit);
+    FTransform GetNeutralCardPlace(ECardSuit CardSuit);
+
+    UFUNCTION(BlueprintImplementableEvent, Category = Placing)
+    FTransform GetCardPlace(ECardSuit CardSuit, EPlayerNum FieldType);
 
     UFUNCTION(BlueprintCallable, Category = Placing)
     void OnStockClicked();
 
     UFUNCTION(BlueprintCallable, Category = Placing)
     void OnCardFieldClicked(bool bIsNeutral, ECardSuit Suit, uint8 PlayerNum);
+
+    UFUNCTION(BlueprintCallable, Category = Placing)
+    void OnPlayFieldClicked(ECardSuit Suit, EPlayerNum Field);
 
 protected:
 	// Called when the game starts or when spawned

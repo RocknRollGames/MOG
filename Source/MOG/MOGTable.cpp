@@ -26,6 +26,13 @@ void AMOGTable::OnCardFieldClicked( bool bIsNeutral, ECardSuit Suit, uint8 Playe
 
 }
 
+
+void AMOGTable::OnPlayFieldClicked(ECardSuit Suit, EPlayerNum Field)
+{
+ 
+}
+
+
 // Called when the game starts or when spawned
 void AMOGTable::BeginPlay()
 {

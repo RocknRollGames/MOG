@@ -14,8 +14,6 @@ enum class ECardSuit : uint8
 	CS_Furr               UMETA(DisplayName = "Furr"),
 	CS_Food               UMETA(DisplayName = "Food"),
 	CS_Building_Materials UMETA(DisplayName = "Building Materials")
-
-
 };
 
 USTRUCT(BlueprintType)

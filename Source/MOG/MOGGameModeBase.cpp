@@ -121,7 +121,7 @@ void AMOGGameModeBase::MoveCardToTheTable(AMOGCard* Card)
 
 AMOGPlayerController* AMOGGameModeBase::GetCurrentTurnController()
 {
-    return Turn == 1 ? FirstPlayerController : SecondPlayerController;
+    return Turn == EPlayerNum::PN_First ? FirstPlayerController : SecondPlayerController;
 }
 
 AActor* AMOGGameModeBase::FindPlayerStart_Implementation(AController* Player, const FString& IncomingName)
@@ -140,5 +140,5 @@ AActor* AMOGGameModeBase::FindPlayerStart_Implementation(AController* Player, co
 
 void AMOGGameModeBase::EndTurn()
 {
-    Turn = Turn == 1 ? 2 : 1;
+    Turn = Turn == EPlayerNum::PN_First ? EPlayerNum::PN_Second : EPlayerNum::PN_First;
 }

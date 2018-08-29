@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
 #include "MOGCard.h"
+#include "MOGGameStructs.h"
 #include "MOGTable.h"
 #include "MOGGameModeBase.generated.h"
 
@@ -21,7 +22,7 @@ public:
 
     virtual APlayerController* Login(UPlayer* NewPlayer, ENetRole InRemoteRole, const FString& Portal, const FString& Options, const FUniqueNetIdRepl& UniqueId, FString& ErrorMessage) override;
 
-    void SetTable(AMOGTable* InTable);
+    void SetTable(class AMOGTable* InTable);
 
     UFUNCTION(BlueprintCallable, Category = Cards)
     uint8 GetNumberOfStockCards();
@@ -77,7 +78,7 @@ private:
     AMOGTable* Table;
 
     UPROPERTY()
-    uint8 Turn = 1;
+    EPlayerNum Turn = EPlayerNum::PN_First;
 
     void MoveCardsToTheStock();
 
